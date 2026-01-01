@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            Profielinformatie
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            Werk je profielinformatie en e-mailadres bij.
         </p>
     </header>
 
@@ -13,51 +13,82 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <label for="avatar" class="block font-medium text-sm text-gray-700">Avatar</label>
+            <div class="mt-2 flex items-center gap-4">
+                @if ($user->avatar)
+                    <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar" class="w-16 h-16 rounded-full object-cover">
+                @else
+                    <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
+                        <span class="text-xl text-gray-500">{{ strtoupper(substr($user->name, 0, 1)) }}</span>
+                    </div>
+                @endif
+                <input type="file" name="avatar" id="avatar" accept="image/*" class="text-sm">
+            </div>
+            @error('avatar')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <label for="name" class="block font-medium text-sm text-gray-700">Naam</label>
+            <input id="name" name="name" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('name', $user->name) }}" required autofocus>
+            @error('name')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="email" class="block font-medium text-sm text-gray-700">E-mailadres</label>
+            <input id="email" name="email" type="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('email', $user->email) }}" required>
+            @error('email')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
+                        Je e-mailadres is niet geverifieerd.
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
+                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md">
+                            Klik hier om de verificatie-e-mail opnieuw te versturen.
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            Een nieuwe verificatielink is naar je e-mailadres gestuurd.
                         </p>
                     @endif
                 </div>
             @endif
         </div>
 
+        <div>
+            <label for="birthday" class="block font-medium text-sm text-gray-700">Verjaardag</label>
+            <input id="birthday" name="birthday" type="date" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('birthday', $user->birthday?->format('Y-m-d')) }}">
+            @error('birthday')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="about_me" class="block font-medium text-sm text-gray-700">Over mij</label>
+            <textarea id="about_me" name="about_me" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" maxlength="1000">{{ old('about_me', $user->about_me) }}</textarea>
+            @error('about_me')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Opslaan</button>
 
             @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                <p class="text-sm text-gray-600">Opgeslagen.</p>
             @endif
         </div>
     </form>
