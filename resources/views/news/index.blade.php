@@ -14,7 +14,10 @@
         <div class="mb-6 p-4 border rounded">
             <div class="flex items-start gap-4">
                 @if ($item->image_path)
-                    <img src="{{ asset('storage/'.$item->image_path) }}" alt="{{ $item->title }}" class="w-32 h-24 object-cover rounded">
+                    <img src="{{ asset('storage/'.$item->image_path) }}" 
+                         alt="{{ $item->title }}" 
+                         style="width: 150px; height: 100px; object-fit: cover; flex-shrink: 0;"
+                         class="rounded">
                 @endif
 
                 <div class="flex-1">

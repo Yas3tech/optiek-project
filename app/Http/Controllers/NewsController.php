@@ -7,6 +7,8 @@ use App\Http\Requests\StoreNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class NewsController extends Controller
 {
@@ -36,12 +38,25 @@ class NewsController extends Controller
      */
     public function store(StoreNewsRequest $request)
     {
+        // IMAGES ZET IK IN storage/app/public/news
          $data = $request->validated();
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            // IMAGES ZET IK IN storage/app/public/news
-            $imagePath = $request->file('image')->store('news', 'public');
+            try {
+                // Resize image to max 800px width
+                $manager = new ImageManager(new Driver());
+                $image = $manager->read($request->file('image'));
+                $image->scale(width: 800);
+
+                $filename = $request->file('image')->hashName();
+                $imagePath = 'news/' . $filename;
+                
+                Storage::disk('public')->put($imagePath, (string) $image->encode());
+            } catch (\Exception $e) {
+                //geef de originele image als fail
+                $imagePath = $request->file('image')->store('news', 'public');
+            }
         }
 
         $news = News::create([
@@ -88,7 +103,19 @@ class NewsController extends Controller
                 Storage::disk('public')->delete($news->image_path);
             }
 
-            $news->image_path = $request->file('image')->store('news', 'public');
+            try {
+                $manager = new ImageManager(new Driver());
+                $image = $manager->read($request->file('image'));
+                $image->scale(width: 800);
+
+                $filename = $request->file('image')->hashName();
+                $imagePath = 'news/' . $filename;
+                
+                Storage::disk('public')->put($imagePath, (string) $image->encode());
+                $news->image_path = $imagePath;
+            } catch (\Exception $e) {
+                $news->image_path = $request->file('image')->store('news', 'public');
+            }
         }
 
         $news->title = $data['title'];
