@@ -19,7 +19,7 @@ class ContactController extends Controller
     {
         $validated = $request->validated();
 
-        Mail::to(config('mail.from.address', 'info@opticalium.be'))
+        Mail::to('admin@ehb.be')
             ->send(new ContactFormMail($validated));
 
         return redirect()->route('contact.form')

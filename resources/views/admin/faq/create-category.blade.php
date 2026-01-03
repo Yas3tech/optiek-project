@@ -17,6 +17,15 @@
         </div>
 
         <div>
+            <label for="description" class="block font-medium mb-1">Beschrijving (optioneel)</label>
+            <textarea name="description" id="description" rows="3" 
+                   class="w-full border rounded p-2">{{ old('description') }}</textarea>
+            @error('description')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
             <label for="position" class="block font-medium mb-1">Positie (volgorde)</label>
             <input type="number" name="position" id="position" value="{{ old('position', 0) }}" min="0"
                    class="w-full border rounded p-2">

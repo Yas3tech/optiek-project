@@ -43,6 +43,14 @@
         </div>
 
         <div>
+            <label for="username" class="block font-medium text-sm text-gray-700">Gebruikersnaam (weergavenaam)</label>
+            <input id="username" name="username" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('username', $user->username) }}">
+            @error('username')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
             <label for="email" class="block font-medium text-sm text-gray-700">E-mailadres</label>
             <input id="email" name="email" type="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('email', $user->email) }}" required>
             @error('email')

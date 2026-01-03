@@ -9,6 +9,7 @@ class FaqCategory extends Model
 {
     protected $fillable = [
         'name',
+        'description',
         'position',
     ];
 

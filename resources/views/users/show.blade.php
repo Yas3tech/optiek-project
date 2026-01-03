@@ -19,7 +19,10 @@
 
             {{-- Profile Info --}}
             <div class="flex-1">
-                <h1 class="text-2xl font-bold">{{ $user->name }}</h1>
+                <h1 class="text-2xl font-bold">{{ $user->username ?? $user->name }}</h1>
+                @if ($user->username)
+                    <p class="text-gray-500">{{ $user->name }}</p>
+                @endif
                 
                 @if ($user->birthday)
                     <p class="text-gray-600 mt-1">
