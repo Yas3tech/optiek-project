@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminFaqController;
+use App\Http\Controllers\AdminGlassController;
+use App\Http\Controllers\AdminTagController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', fn () => redirect()->route('admin.users.index'));
@@ -29,4 +31,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/faq/question/{faq}/edit', [AdminFaqController::class, 'editFaq'])->name('admin.faq.edit-faq');
     Route::put('/admin/faq/question/{faq}', [AdminFaqController::class, 'updateFaq'])->name('admin.faq.update-faq');
     Route::delete('/admin/faq/question/{faq}', [AdminFaqController::class, 'destroyFaq'])->name('admin.faq.destroy-faq');
+
+    // Glasses Admin
+    Route::resource('/admin/glasses', AdminGlassController::class)
+        ->except(['show'])
+        ->names('admin.glasses');
+
+    // Tags Admin
+    Route::resource('/admin/tags', AdminTagController::class)
+        ->except(['show'])
+        ->names('admin.tags');
 });
