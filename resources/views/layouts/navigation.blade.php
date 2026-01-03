@@ -18,8 +18,11 @@
                     <x-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
                         Nieuws
                     </x-nav-link>
-                    <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+                <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
                         FAQ
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
+                        Contact
                     </x-nav-link>
                     @auth
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -100,6 +103,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
                 FAQ
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
+                Contact
             </x-responsive-nav-link>
             @auth
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

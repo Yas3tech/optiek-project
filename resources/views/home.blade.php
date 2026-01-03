@@ -98,6 +98,7 @@
     <div style="display: flex; justify-content: center; gap: 24px; margin-top: 16px;">
         <a href="{{ route('news.index') }}" style="color: #9ca3af; text-decoration: none;">Nieuws</a>
         <a href="{{ route('faq.index') }}" style="color: #9ca3af; text-decoration: none;">FAQ</a>
+        <a href="{{ route('contact.form') }}" style="color: #9ca3af; text-decoration: none;">Contact</a>
     </div>
 </footer>
 @endsection
