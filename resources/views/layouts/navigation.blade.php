@@ -25,6 +25,9 @@
                         Contact
                     </x-nav-link>
                     @auth
+                        <x-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
+                            Webshop Brillen
+                        </x-nav-link>
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             Dashboard
                         </x-nav-link>
@@ -108,6 +111,9 @@
                 Contact
             </x-responsive-nav-link>
             @auth
+                <x-responsive-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
+                    Brillen
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     Dashboard
                 </x-responsive-nav-link>

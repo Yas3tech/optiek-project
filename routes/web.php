@@ -6,6 +6,7 @@ use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GlassController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -18,6 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/glasses', [GlassController::class, 'index'])->name('glasses.index');
+    Route::get('/glasses/{glass}', [GlassController::class, 'show'])->name('glasses.show');
 });
 
 Route::get('/users/{user}', [PublicProfileController::class, 'show'])->name('users.show');
