@@ -23,7 +23,6 @@ class ProfileUpdateRequest extends FormRequest
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
             'birthday' => ['nullable', 'date'],
-            'about_me' => ['nullable', 'string', 'max:1000'],
             'avatar' => ['nullable', 'image', 'max:2048'],
         ];
     }

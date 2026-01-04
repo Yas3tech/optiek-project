@@ -84,14 +84,6 @@
             @enderror
         </div>
 
-        <div>
-            <label for="about_me" class="block font-medium text-sm text-gray-700">Over mij</label>
-            <textarea id="about_me" name="about_me" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" maxlength="1000">{{ old('about_me', $user->about_me) }}</textarea>
-            @error('about_me')
-                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-            @enderror
-        </div>
-
         <div class="flex items-center gap-4">
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Opslaan</button>
 

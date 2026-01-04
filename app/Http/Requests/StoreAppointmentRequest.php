@@ -17,7 +17,6 @@ class StoreAppointmentRequest extends FormRequest
             'date' => ['required', 'date', 'after_or_equal:today'],
             'time_slot' => ['required', 'string', 'in:09:00,09:30,10:00,10:30,11:00,11:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00'],
             'reason' => ['required', 'string', 'max:500'],
-            'phone' => ['nullable', 'string', 'max:20'],
         ];
     }
 
@@ -30,7 +29,6 @@ class StoreAppointmentRequest extends FormRequest
             'time_slot.in' => 'Kies een geldig tijdslot.',
             'reason.required' => 'Vul de reden van uw bezoek in.',
             'reason.max' => 'De reden mag maximaal 500 tekens bevatten.',
-            'phone.max' => 'Het telefoonnummer mag maximaal 20 tekens bevatten.',
         ];
     }
 }

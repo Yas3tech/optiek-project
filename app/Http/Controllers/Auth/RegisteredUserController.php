@@ -14,32 +14,58 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.register-step1');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
+    public function storeStep1(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['nullable', 'string', 'max:50'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'birthday' => ['nullable', 'date'],
+        ]);
+
+        $request->session()->put('registration', $validated);
+
+        return redirect()->route('register.step2');
+    }
+
+    public function showStep2(Request $request): View|RedirectResponse
+    {
+        if (!$request->session()->has('registration')) {
+            return redirect()->route('register');
+        }
+
+        return view('auth.register-step2');
+    }
+
     public function store(Request $request): RedirectResponse
     {
+        if (!$request->session()->has('registration')) {
+            return redirect()->route('register');
+        }
+
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $step1Data = $request->session()->get('registration');
+
         $user = User::create([
-            'name' => $request->name,
+            'name' => $step1Data['first_name'] . ' ' . $step1Data['last_name'],
+            'username' => $step1Data['username'] ?? null,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone' => $step1Data['phone'] ?? null,
+            'birthday' => $step1Data['birthday'] ?? null,
         ]);
+
+        $request->session()->forget('registration');
 
         event(new Registered($user));
 
