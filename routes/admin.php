@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminFaqController;
 use App\Http\Controllers\AdminGlassController;
 use App\Http\Controllers\AdminTagController;
+use App\Http\Controllers\AdminAppointmentController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', fn () => redirect()->route('admin.users.index'));
@@ -32,13 +33,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/faq/question/{faq}', [AdminFaqController::class, 'updateFaq'])->name('admin.faq.update-faq');
     Route::delete('/admin/faq/question/{faq}', [AdminFaqController::class, 'destroyFaq'])->name('admin.faq.destroy-faq');
 
-    // Glasses Admin
     Route::resource('/admin/glasses', AdminGlassController::class)
         ->except(['show'])
         ->names('admin.glasses');
 
-    // Tags Admin
     Route::resource('/admin/tags', AdminTagController::class)
         ->except(['show'])
         ->names('admin.tags');
+
+    Route::get('/admin/appointments', [AdminAppointmentController::class, 'index'])->name('admin.appointments.index');
+    Route::post('/admin/appointments/{appointment}/approve', [AdminAppointmentController::class, 'approve'])->name('admin.appointments.approve');
+    Route::post('/admin/appointments/{appointment}/reject', [AdminAppointmentController::class, 'reject'])->name('admin.appointments.reject');
+    Route::delete('/admin/appointments/{appointment}', [AdminAppointmentController::class, 'destroy'])->name('admin.appointments.destroy');
 });

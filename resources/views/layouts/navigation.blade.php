@@ -28,6 +28,9 @@
                         <x-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
                             Webshop Brillen
                         </x-nav-link>
+                        <x-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
+                            Afspraken
+                        </x-nav-link>
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             Dashboard
                         </x-nav-link>
@@ -113,6 +116,9 @@
             @auth
                 <x-responsive-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
                     Brillen
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
+                    Afspraken
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     Dashboard
