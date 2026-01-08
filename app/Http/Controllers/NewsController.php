@@ -81,7 +81,7 @@ class NewsController extends Controller
         ]);
 
         return redirect()
-            ->route('news.show', $news)
+            ->route('admin.news.index')
             ->with('success', 'News created successfully.');
     }
 
@@ -137,7 +137,7 @@ class NewsController extends Controller
         $news->save();
 
         return redirect()
-            ->route('news.show', $news)
+            ->route('admin.news.index')
             ->with('success', 'News updated successfully.');
     }
 

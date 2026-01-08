@@ -38,13 +38,14 @@
         <div>
             <label for="phone" class="block font-medium mb-1">Telefoonnummer</label>
             <input type="text" name="phone" id="phone" value="{{ old('phone') }}" required
-                   class="w-full border rounded p-2" maxlength="20">
+                   class="w-full border rounded p-2" maxlength="20"
+                   pattern="[0-9\s\-\+\(\)]*" title="Enkel cijfers and tekens zoals +, -, (, ) zijn toegestaan">
         </div>
 
         <div>
             <label for="birthday" class="block font-medium mb-1">Geboortedatum</label>
             <input type="date" name="birthday" id="birthday" value="{{ old('birthday') }}" required
-                   class="w-full border rounded p-2">
+                   class="w-full border rounded p-2" max="{{ date('Y-m-d') }}">
         </div>
 
         <div>

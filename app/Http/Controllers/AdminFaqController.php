@@ -25,7 +25,11 @@ class AdminFaqController extends Controller
 
     public function storeCategory(StoreFaqCategoryRequest $request): RedirectResponse
     {
-        FaqCategory::create($request->validated());
+        $data = $request->validated();
+        
+        FaqCategory::where('position', '>=', $data['position'])->increment('position');
+
+        FaqCategory::create($data);
 
         return redirect()
             ->route('admin.faq.index')
@@ -39,7 +43,23 @@ class AdminFaqController extends Controller
 
     public function updateCategory(StoreFaqCategoryRequest $request, FaqCategory $category): RedirectResponse
     {
-        $category->update($request->validated());
+        $data = $request->validated();
+        $newPosition = $data['position'];
+        $oldPosition = $category->position;
+
+        if ($newPosition !== $oldPosition) {
+            if ($newPosition < $oldPosition) {
+                FaqCategory::where('position', '>=', $newPosition)
+                    ->where('position', '<', $oldPosition)
+                    ->increment('position');
+            } else {
+                FaqCategory::where('position', '>', $oldPosition)
+                    ->where('position', '<=', $newPosition)
+                    ->decrement('position');
+            }
+        }
+
+        $category->update($data);
 
         return redirect()
             ->route('admin.faq.index')

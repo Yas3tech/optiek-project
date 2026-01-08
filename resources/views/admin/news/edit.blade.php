@@ -50,18 +50,22 @@
             <textarea name="content" rows="8" required class="w-full border rounded p-2">{{ old('content', $news->content) }}</textarea>
         </div>
 
-        <div class="flex gap-3">
-            <button type="submit" class="px-4 py-2 border rounded">Opslaan</button>
-            <a href="{{ route('news.show', $news) }}" class="px-4 py-2 border rounded">Annuleren</a>
+        <div class="flex gap-3 pt-4">
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700">
+                Opslaan
+            </button>
+            <a href="{{ route('admin.news.index') }}" class="px-4 py-2 border rounded hover:bg-gray-50">
+                Annuleren
+            </a>
         </div>
     </form>
 
-    <form action="{{ url('/admin/news/'.$news->id) }}" method="POST" class="mt-6">
+    <form action="{{ url('/admin/news/'.$news->id) }}" method="POST" class="mt-8 pt-6 border-t">
         @csrf
         @method('DELETE')
-        <button type="submit" class="px-4 py-2 border rounded"
+        <button type="submit" class="px-4 py-2 bg-red-600 text-white font-medium rounded hover:bg-red-700"
                 onclick="return confirm('Ben je zeker dat je dit nieuwsitem wil verwijderen?')">
-            Verwijderen
+            Nieuwsitem verwijderen
         </button>
     </form>
 </div>

@@ -26,23 +26,24 @@
                     <label for="name" style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
                         Naam <span style="color: #ef4444;">*</span>
                     </label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" required
+                    <input type="text" id="name" name="name" value="{{ old('name', auth()->user()->name) }}" required
                         style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
                     @error('name')
                         <p style="color: #ef4444; font-size: 0.875rem; margin-top: 4px;">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div style="margin-bottom: 20px;">
+                {{-- Email field hidden for logged-in users as requested --}}
+                <div style="margin-bottom: 20px; display: none;">
                     <label for="email" style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
-                        E-mailadres <span style="color: #ef4444;">*</span>
+                        E-mailadres 
                     </label>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                        style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
-                    @error('email')
-                        <p style="color: #ef4444; font-size: 0.875rem; margin-top: 4px;">{{ $message }}</p>
-                    @enderror
+                    <input type="email" id="email" name="email" value="{{ auth()->user()->email }}" readonly
+                        style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; box-sizing: border-box; background: #f3f4f6;">
                 </div>
+                <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 20px;">
+                    Verzenden als: <strong>{{ auth()->user()->email }}</strong>
+                </p>
 
                 <div style="margin-bottom: 20px;">
                     <label for="phone" style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">

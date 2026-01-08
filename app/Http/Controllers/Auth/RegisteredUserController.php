@@ -25,8 +25,11 @@ class RegisteredUserController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:50'],
-            'phone' => ['required', 'string', 'max:20'],
-            'birthday' => ['required', 'date'],
+            'phone' => ['required', 'string', 'max:20', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'birthday' => ['required', 'date', 'before:today'],
+        ], [
+            'phone.regex' => 'Het telefoonnummer mag enkel cijfers en tekens zoals +, -, (, ) bevatten.',
+            'birthday.before' => 'De geboortedatum moet in het verleden liggen.',
         ]);
 
         $request->session()->put('registration', $validated);

@@ -46,10 +46,15 @@
             </div>
 
             <div class="flex items-center justify-between mt-6">
-                <a class="text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                    ← Terug
-                </a>
-                <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                <div class="flex flex-col">
+                    <a class="text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                        ← Terug
+                    </a>
+                    <a class="text-xs text-gray-500 hover:text-gray-700 mt-2" href="{{ route('login') }}">
+                        Al een account?
+                    </a>
+                </div>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                     Account aanmaken
                 </button>
             </div>

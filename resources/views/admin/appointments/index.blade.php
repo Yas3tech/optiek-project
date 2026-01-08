@@ -69,11 +69,15 @@
                                 @if($appointment->isPending())
                                     <form action="{{ route('admin.appointments.approve', $appointment) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="text-green-600 hover:underline">Bevestigen</button>
+                                        <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">
+                                            Bevestigen
+                                        </button>
                                     </form>
                                     <form action="{{ route('admin.appointments.reject', $appointment) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="text-red-600 hover:underline">Afwijzen</button>
+                                        <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">
+                                            Afwijzen
+                                        </button>
                                     </form>
                                 @endif
                                 <form action="{{ route('admin.appointments.destroy', $appointment) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze afspraak wilt verwijderen?')">

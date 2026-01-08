@@ -37,9 +37,13 @@
             <textarea name="content" rows="8" required class="w-full border rounded p-2">{{ old('content') }}</textarea>
         </div>
 
-        <div class="flex gap-3">
-            <button type="submit" class="px-4 py-2 border rounded">Opslaan</button>
-            <a href="{{ route('news.index') }}" class="px-4 py-2 border rounded">Annuleren</a>
+        <div class="flex gap-3 pt-4">
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700">
+                Opslaan
+            </button>
+            <a href="{{ route('admin.news.index') }}" class="px-4 py-2 border rounded hover:bg-gray-50">
+                Annuleren
+            </a>
         </div>
     </form>
 </div>

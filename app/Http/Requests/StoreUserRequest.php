@@ -19,8 +19,8 @@ class StoreUserRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:50', 'unique:users,username'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'phone' => ['required', 'string', 'max:20'],
-            'birthday' => ['required', 'date'],
+            'phone' => ['required', 'string', 'max:20', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'birthday' => ['required', 'date', 'before:today'],
             'password' => ['required', 'confirmed', Password::defaults()],
             'is_admin' => ['nullable', 'boolean'],
         ];
@@ -37,6 +37,8 @@ class StoreUserRequest extends FormRequest
             'email.unique' => 'Dit e-mailadres is al in gebruik.',
             'password.required' => 'Het wachtwoord is verplicht.',
             'password.confirmed' => 'De wachtwoorden komen niet overeen.',
+            'phone.regex' => 'Het telefoonnummer mag enkel cijfers en tekens zoals +, -, (, ) bevatten.',
+            'birthday.before' => 'De geboortedatum moet in het verleden liggen.',
         ];
     }
 }

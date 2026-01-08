@@ -29,7 +29,7 @@ class DashboardController extends Controller
         $stats = [
             'pending_appointments' => Appointment::where('status', 'pending')->count(),
             'total_appointments' => Appointment::count(),
-            'unread_messages' => ContactMessage::whereNull('response')->count(),
+            'unread_messages' => ContactMessage::where('status', 'pending')->count(),
             'total_glasses' => Glass::count(),
             'total_users' => User::where('is_admin', false)->count(),
             'total_news' => News::count(),
@@ -45,7 +45,7 @@ class DashboardController extends Controller
         
         // Recent unread messages
         $unreadMessages = ContactMessage::with('user')
-            ->whereNull('response')
+            ->where('status', 'pending')
             ->orderByDesc('created_at')
             ->take(5)
             ->get();

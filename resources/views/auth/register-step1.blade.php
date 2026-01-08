@@ -47,7 +47,8 @@
             <div class="mt-4">
                 <label for="phone" class="block font-medium text-sm text-gray-700">Telefoonnummer *</label>
                 <input id="phone" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" 
-                       type="tel" name="phone" value="{{ old('phone') }}" placeholder="+32 ..." required maxlength="20">
+                       type="tel" name="phone" value="{{ old('phone') }}" placeholder="+32 ..." required maxlength="20"
+                       pattern="[0-9\s\-\+\(\)]*" title="Enkel cijfers and tekens zoals +, -, (, ) zijn toegestaan">
                 @error('phone')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -56,7 +57,8 @@
             <div class="mt-4">
                 <label for="birthday" class="block font-medium text-sm text-gray-700">Geboortedatum *</label>
                 <input id="birthday" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" 
-                       type="date" name="birthday" value="{{ old('birthday') }}" required>
+                       type="date" name="birthday" value="{{ old('birthday') }}" required
+                       max="{{ date('Y-m-d') }}">
                 @error('birthday')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
