@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
     Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
+
+    Route::get('/my-messages', [ContactController::class, 'myMessages'])->name('my-messages');
 });
 
 Route::get('/users/{user}', [PublicProfileController::class, 'show'])->name('users.show');

@@ -14,12 +14,17 @@
                     Welkom terug, {{ Auth::user()->name }}!
                 </h1>
                 <p style="color: #dbeafe; font-size: 1rem;">
-                    Beheer uw afspraken en bekijk onze brillen collectie.
+                    @if(Auth::user()->is_admin)
+                        Beheer de website en bekijk het laatste nieuws.
+                    @else
+                        Beheer uw afspraken en bekijk onze brillen collectie.
+                    @endif
                 </p>
             </div>
 
             <!-- Quick Actions -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px;">
+                @if(!Auth::user()->is_admin)
                 <a href="{{ route('appointments.create') }}" style="display: flex; align-items: center; gap: 12px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.12)';" onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.07)';">
                     <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #2563eb, #4f46e5); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
                         <svg style="width: 24px; height: 24px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,6 +36,7 @@
                         <div style="font-size: 0.875rem; color: #6b7280;">Plan een oogtest</div>
                     </div>
                 </a>
+                @endif
                 
                 <a href="{{ route('glasses.index') }}" style="display: flex; align-items: center; gap: 12px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.12)';" onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.07)';">
                     <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #16a34a, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
@@ -45,6 +51,7 @@
                     </div>
                 </a>
                 
+                @if(!Auth::user()->is_admin)
                 <a href="{{ route('appointments.index') }}" style="display: flex; align-items: center; gap: 12px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.12)';" onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.07)';">
                     <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #9333ea, #7c3aed); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
                         <svg style="width: 24px; height: 24px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,12 +63,14 @@
                         <div style="font-size: 0.875rem; color: #6b7280;">Bekijk overzicht</div>
                     </div>
                 </a>
+                @endif
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr; lg:grid-template-columns: 2fr 1fr; gap: 24px;">
                 <!-- Left Column -->
                 <div style="display: flex; flex-direction: column; gap: 24px;">
                     
+                    @if(!Auth::user()->is_admin)
                     <!-- Next Appointment -->
                     <div style="background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); overflow: hidden;">
                         <div style="padding: 20px 24px; border-bottom: 1px solid #e5e7eb;">
@@ -98,7 +107,9 @@
                             @endif
                         </div>
                     </div>
+                    @endif
 
+                    @if(!Auth::user()->is_admin)
                     <!-- Appointments Overview -->
                     <div style="background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); overflow: hidden;">
                         <div style="padding: 20px 24px; border-bottom: 1px solid #e5e7eb;">
@@ -121,6 +132,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
 
                 <!-- Right Column: Recent News -->

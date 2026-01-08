@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@auth
+{{-- Logged-in users see the full contact form --}}
 <div style="padding: 64px 20px; background: #f9fafb; min-height: calc(100vh - 64px);">
     <div style="max-width: 600px; margin: 0 auto;">
         <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 8px; color: #1f2937; text-align: center;">
@@ -97,4 +99,53 @@
         </div>
     </div>
 </div>
+@else
+{{-- Guests see login option + mailto button --}}
+<div style="padding: 64px 20px; background: #f9fafb; min-height: calc(100vh - 64px);">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 8px; color: #1f2937; text-align: center;">
+            Contact
+        </h1>
+        <p style="color: #6b7280; text-align: center; margin-bottom: 32px;">
+            Heeft u vragen? Neem contact met ons op!
+        </p>
+
+        <div style="background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 32px; text-align: center;">
+            <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #2563eb, #4f46e5); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                <svg style="width: 32px; height: 32px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+            
+            <p style="color: #374151; font-size: 1.125rem; margin-bottom: 24px;">
+                Log in om contact op te nemen via de app, of stuur ons direct een e-mail.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="{{ route('login') }}" 
+                   style="display: inline-block; padding: 14px 24px; background: #2563eb; color: white; font-weight: 600; font-size: 1rem; border-radius: 8px; text-decoration: none;">
+                    Inloggen om te contacteren
+                </a>
+                
+                <a href="mailto:info@opticalium.be?subject=Vraag%20voor%20Opticalium" 
+                   style="display: inline-block; padding: 14px 24px; background: white; color: #2563eb; font-weight: 600; font-size: 1rem; border: 2px solid #2563eb; border-radius: 8px; text-decoration: none;">
+                    E-mail versturen via mail app
+                </a>
+            </div>
+
+            <p style="color: #6b7280; font-size: 0.875rem; margin-top: 16px;">
+                Nog geen account? <a href="{{ route('register') }}" style="color: #2563eb; text-decoration: underline;">Registreer hier</a>
+            </p>
+        </div>
+
+        <div style="margin-top: 32px; text-align: center; color: #6b7280;">
+            <p style="margin-bottom: 8px;"><strong>Opticalium</strong></p>
+            <p>Rue du pont du Christ 41, 1300 Wavre</p>
+            <p>Tel: 010 43 99 23</p>
+            <p>info@opticalium.be</p>
+        </div>
+    </div>
+</div>
+@endauth
 @endsection
+

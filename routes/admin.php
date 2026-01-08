@@ -7,12 +7,15 @@ use App\Http\Controllers\AdminFaqController;
 use App\Http\Controllers\AdminGlassController;
 use App\Http\Controllers\AdminTagController;
 use App\Http\Controllers\AdminAppointmentController;
+use App\Http\Controllers\AdminContactController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', fn () => redirect()->route('admin.users.index'));
     
+    Route::get('/admin/news', [NewsController::class, 'adminIndex'])->name('admin.news.index');
     Route::resource('/admin/news', NewsController::class)
-        ->except(['index','show']);
+        ->except(['index','show'])
+        ->names('admin.news');
     
     Route::resource('/admin/users', AdminUserController::class)
         ->except(['show', 'edit', 'update'])
@@ -45,4 +48,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/appointments/{appointment}/approve', [AdminAppointmentController::class, 'approve'])->name('admin.appointments.approve');
     Route::post('/admin/appointments/{appointment}/reject', [AdminAppointmentController::class, 'reject'])->name('admin.appointments.reject');
     Route::delete('/admin/appointments/{appointment}', [AdminAppointmentController::class, 'destroy'])->name('admin.appointments.destroy');
+
+    // Contact Messages Admin
+    Route::get('/admin/contact', [AdminContactController::class, 'index'])->name('admin.contact.index');
+    Route::get('/admin/contact/{message}', [AdminContactController::class, 'show'])->name('admin.contact.show');
+    Route::post('/admin/contact/{message}/respond', [AdminContactController::class, 'respond'])->name('admin.contact.respond');
 });

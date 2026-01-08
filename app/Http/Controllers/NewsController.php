@@ -26,6 +26,19 @@ class NewsController extends Controller
     }
 
     /**
+     * Display admin listing of the resource.
+     */
+    public function adminIndex()
+    {
+        $newsItems = News::query()
+            ->with('user')
+            ->orderByDesc('published_at')
+            ->paginate(15);
+
+        return view('admin.news.index', compact('newsItems'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -138,7 +151,7 @@ class NewsController extends Controller
         $news->delete();
 
         return redirect()
-            ->route('news.index')
-            ->with('success', 'News deleted successfully.');
+            ->route('admin.news.index')
+            ->with('success', 'Nieuwsartikel succesvol verwijderd.');
     }
 }

@@ -16,25 +16,56 @@
                         Home
                     </x-nav-link>
                     @auth
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            Dashboard
+                        @if(Auth::user()->is_admin)
+                            {{-- Admin navigation - links to management pages --}}
+                            <x-nav-link :href="route('admin.appointments.index')" :active="request()->routeIs('admin.appointments.*')">
+                                Afspraken
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.glasses.index')" :active="request()->routeIs('admin.glasses.*')">
+                                Brillen
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.news.index')" :active="request()->routeIs('admin.news.*')">
+                                Nieuws
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.faq.index')" :active="request()->routeIs('admin.faq.*')">
+                                FAQ
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.contact.index')" :active="request()->routeIs('admin.contact.*')">
+                                Berichten
+                            </x-nav-link>
+                        @else
+                            {{-- Regular user navigation --}}
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                Dashboard
+                            </x-nav-link>
+                            <x-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
+                                Afspraken
+                            </x-nav-link>
+                            <x-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
+                                Webshop Brillen
+                            </x-nav-link>
+                            <x-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
+                                Nieuws
+                            </x-nav-link>
+                            <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+                                FAQ
+                            </x-nav-link>
+                            <x-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
+                                Contact
+                            </x-nav-link>
+                        @endif
+                    @else
+                        {{-- Guest navigation --}}
+                        <x-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
+                            Nieuws
                         </x-nav-link>
-                        <x-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
-                            Afspraken
+                        <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+                            FAQ
                         </x-nav-link>
-                        <x-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
-                            Webshop Brillen
+                        <x-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
+                            Contact
                         </x-nav-link>
                     @endauth
-                    <x-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
-                        Nieuws
-                    </x-nav-link>
-                    <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
-                        FAQ
-                    </x-nav-link>
-                    <x-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
-                        Contact
-                    </x-nav-link>
                 </div>
             </div>
 
@@ -59,9 +90,18 @@
                                 Profiel
                             </x-dropdown-link>
 
+                            @if(!Auth::user()->is_admin)
+                                <x-dropdown-link :href="route('my-messages')">
+                                    Mijn berichten
+                                </x-dropdown-link>
+                            @endif
+
                             @if(Auth::user()->is_admin)
                                 <x-dropdown-link :href="route('admin.users.index')">
                                     Admin
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.contact.index')">
+                                    Berichten
                                 </x-dropdown-link>
                             @endif
 
@@ -105,25 +145,56 @@
                 Home
             </x-responsive-nav-link>
             @auth
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    Dashboard
+                @if(Auth::user()->is_admin)
+                    {{-- Admin navigation - links to management pages --}}
+                    <x-responsive-nav-link :href="route('admin.appointments.index')" :active="request()->routeIs('admin.appointments.*')">
+                        Afspraken
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.glasses.index')" :active="request()->routeIs('admin.glasses.*')">
+                        Brillen
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.news.index')" :active="request()->routeIs('admin.news.*')">
+                        Nieuws
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.faq.index')" :active="request()->routeIs('admin.faq.*')">
+                        FAQ
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.contact.index')" :active="request()->routeIs('admin.contact.*')">
+                        Berichten
+                    </x-responsive-nav-link>
+                @else
+                    {{-- Regular user navigation --}}
+                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        Dashboard
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
+                        Afspraken
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
+                        Webshop Brillen
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
+                        Nieuws
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+                        FAQ
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
+                        Contact
+                    </x-responsive-nav-link>
+                @endif
+            @else
+                {{-- Guest navigation --}}
+                <x-responsive-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
+                    Nieuws
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
-                    Afspraken
+                <x-responsive-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+                    FAQ
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
-                    Brillen
+                <x-responsive-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
+                    Contact
                 </x-responsive-nav-link>
             @endauth
-            <x-responsive-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
-                Nieuws
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
-                FAQ
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
-                Contact
-            </x-responsive-nav-link>
         </div>
 
         @auth
@@ -139,9 +210,18 @@
                         Profiel
                     </x-responsive-nav-link>
 
+                    @if(!Auth::user()->is_admin)
+                        <x-responsive-nav-link :href="route('my-messages')">
+                            Mijn berichten
+                        </x-responsive-nav-link>
+                    @endif
+
                     @if(Auth::user()->is_admin)
                         <x-responsive-nav-link :href="route('admin.users.index')">
                             Admin
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('admin.contact.index')">
+                            Berichten
                         </x-responsive-nav-link>
                     @endif
 
