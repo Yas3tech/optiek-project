@@ -18,6 +18,9 @@
                     @auth
                         @if(Auth::user()->is_admin)
                             {{-- Admin navigation - links to management pages --}}
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                Dashboard
+                            </x-nav-link>
                             <x-nav-link :href="route('admin.appointments.index')" :active="request()->routeIs('admin.appointments.*')">
                                 Afspraken
                             </x-nav-link>
@@ -147,6 +150,9 @@
             @auth
                 @if(Auth::user()->is_admin)
                     {{-- Admin navigation - links to management pages --}}
+                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        Dashboard
+                    </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('admin.appointments.index')" :active="request()->routeIs('admin.appointments.*')">
                         Afspraken
                     </x-responsive-nav-link>
