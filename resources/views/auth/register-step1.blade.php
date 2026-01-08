@@ -36,27 +36,27 @@
             </div>
 
             <div class="mt-4">
-                <label for="username" class="block font-medium text-sm text-gray-700">Gebruikersnaam (weergavenaam)</label>
+                <label for="username" class="block font-medium text-sm text-gray-700">Gebruikersnaam (weergavenaam) *</label>
                 <input id="username" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" 
-                       type="text" name="username" value="{{ old('username') }}" placeholder="Optioneel" maxlength="50">
+                       type="text" name="username" value="{{ old('username') }}" required maxlength="50">
                 @error('username')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mt-4">
-                <label for="phone" class="block font-medium text-sm text-gray-700">Telefoonnummer</label>
+                <label for="phone" class="block font-medium text-sm text-gray-700">Telefoonnummer *</label>
                 <input id="phone" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" 
-                       type="tel" name="phone" value="{{ old('phone') }}" placeholder="+32 ..." maxlength="20">
+                       type="tel" name="phone" value="{{ old('phone') }}" placeholder="+32 ..." required maxlength="20">
                 @error('phone')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mt-4">
-                <label for="birthday" class="block font-medium text-sm text-gray-700">Geboortedatum</label>
+                <label for="birthday" class="block font-medium text-sm text-gray-700">Geboortedatum *</label>
                 <input id="birthday" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" 
-                       type="date" name="birthday" value="{{ old('birthday') }}">
+                       type="date" name="birthday" value="{{ old('birthday') }}" required>
                 @error('birthday')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror

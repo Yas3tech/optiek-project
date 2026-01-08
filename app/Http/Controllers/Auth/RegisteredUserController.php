@@ -24,9 +24,9 @@ class RegisteredUserController extends Controller
         $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'username' => ['nullable', 'string', 'max:50'],
-            'phone' => ['nullable', 'string', 'max:20'],
-            'birthday' => ['nullable', 'date'],
+            'username' => ['required', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:20'],
+            'birthday' => ['required', 'date'],
         ]);
 
         $request->session()->put('registration', $validated);

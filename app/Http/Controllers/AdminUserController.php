@@ -29,7 +29,10 @@ class AdminUserController extends Controller
 
         User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
+            'birthday' => $data['birthday'],
             'password' => Hash::make($data['password']),
             'is_admin' => $request->boolean('is_admin'),
         ]);

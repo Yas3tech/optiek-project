@@ -30,6 +30,24 @@
         </div>
 
         <div>
+            <label for="username" class="block font-medium mb-1">Gebruikersnaam</label>
+            <input type="text" name="username" id="username" value="{{ old('username') }}" required
+                   class="w-full border rounded p-2" maxlength="50">
+        </div>
+
+        <div>
+            <label for="phone" class="block font-medium mb-1">Telefoonnummer</label>
+            <input type="text" name="phone" id="phone" value="{{ old('phone') }}" required
+                   class="w-full border rounded p-2" maxlength="20">
+        </div>
+
+        <div>
+            <label for="birthday" class="block font-medium mb-1">Geboortedatum</label>
+            <input type="date" name="birthday" id="birthday" value="{{ old('birthday') }}" required
+                   class="w-full border rounded p-2">
+        </div>
+
+        <div>
             <label for="password" class="block font-medium mb-1">Wachtwoord</label>
             <input type="password" name="password" id="password" required
                    class="w-full border rounded p-2" minlength="8">
