@@ -1,59 +1,209 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Opticalium - Optiek Webapplicatie
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Een complete webapplicatie voor een optieker, gebouwd met Laravel 12 en Tailwind CSS. De applicatie biedt functionaliteiten voor klanten om afspraken te maken, brillen te bekijken en contact op te nemen, evenals een uitgebreide admin interface voor het beheren van de website.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Voor Klanten
+- **Afspraken maken** - Plan een oogtest of andere afspraak
+- **Brillen catalogus** - Bekijk de collectie met filters op tags
+- **Nieuws** - Lees het laatste nieuws promo's of nieuwsartikelen
+- **FAQ** - Veelgestelde vragen per categorie
+- **Contact** - Stuur berichten en bekijk antwoorden
+- **Dashboard** - Persoonlijk overzicht met afspraken status
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Voor Admins
+- **Dashboard** - Overzicht met statistieken, wachtende afspraken en ongelezen berichten
+- **Afspraken beheer** - Goedkeuren/afwijzen van afspraken
+- **Brillen beheer** - CRUD voor brillen met afbeeldingen en tags
+- **Nieuws beheer** - Publiceer en bewerk nieuwsartikelen
+- **FAQ beheer** - Beheer categorieën en vragen
+- **Berichten beheer** - Bekijk en beantwoord contactberichten
+- **Gebruikers beheer** - Beheer gebruikers en admin rechten
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Vereisten
 
-## Learning Laravel
+- PHP 8.2 of hoger
+- Composer
+- Node.js 18+ en npm
+- SQLite (standaard) of MySQL/PostgreSQL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Installatie
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clone de repository
 
-## Laravel Sponsors
+```bash
+git clone <repository-url>
+cd optiek-project
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Installeer dependencies
 
-### Premium Partners
+```bash
+composer install
+npm install
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 3. Configureer de omgeving
 
-## Contributing
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Database setup
 
-## Code of Conduct
+```bash
+# Maak de SQLite database aan
+touch database/database.sqlite
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Voer de migraties uit
+php artisan migrate
 
-## Security Vulnerabilities
+# Seed de database met testdata
+php artisan db:seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. Storage link
 
-## License
+```bash
+php artisan storage:link
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 6. Build assets
+
+```bash
+npm run build
+```
+
+## Development
+
+Start de development server met alle services:
+
+```bash
+composer dev
+```
+
+Dit start:
+- Laravel development server (http://localhost:8000)
+- Vite HMR server
+- Queue worker
+- Log viewer (Pail)
+
+Of start de services afzonderlijk:
+
+```bash
+# Alleen Laravel server
+php artisan serve
+
+# Alleen Vite
+npm run dev
+```
+
+## Test Accounts
+
+Na het seeden zijn de volgende accounts beschikbaar:
+
+| Email | Wachtwoord | Rol |
+|-------|------------|-----|
+| admin@ehb.be | Password!321 | Admin |
+| test@ehb.be | Password!321 | Klant |
+
+## Project Structuur
+
+```
+optiek-project/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/        # Alle controllers
+│   │   ├── Middleware/         # Admin middleware
+│   │   └── Requests/           # Form request validatie
+│   └── Models/                 # Eloquent models
+├── database/
+│   ├── migrations/             # Database migraties
+│   └── seeders/                # Database seeders
+├── resources/
+│   └── views/
+│       ├── admin/              # Admin views
+│       ├── appointments/       # Afspraken views
+│       ├── glasses/            # Brillen views
+│       ├── news/               # Nieuws views
+│       └── layouts/            # Layout templates
+├── routes/
+│   ├── web.php                 # Publieke routes
+│   ├── admin.php               # Admin routes
+│   └── auth.php                # Authenticatie routes
+└── storage/
+    └── app/public/             # Uploads (brillen, nieuws afbeeldingen)
+```
+
+## Database Models
+
+| Model | Beschrijving |
+|-------|-------------|
+| User | Gebruikers met admin flag |
+| Appointment | Afspraken met status (pending/approved/rejected) |
+| Glass | Brillen met afbeelding, prijs, voorraad |
+| Tag | Tags voor brillen filtering |
+| News | Nieuwsartikelen |
+| FaqCategory | FAQ categorieën |
+| Faq | FAQ vragen en antwoorden |
+| ContactMessage | Contactberichten met antwoorden |
+
+## Routes Overzicht
+
+### Publieke Routes
+- `GET /` - Homepage
+- `GET /news` - Nieuws overzicht
+- `GET /news/{news}` - Nieuws detail
+- `GET /faq` - FAQ pagina
+- `GET /contact` - Contact formulier
+
+### Klant Routes (auth required)
+- `GET /dashboard` - Klant dashboard
+- `GET /glasses` - Brillen catalogus
+- `GET /appointments` - Mijn afspraken
+- `POST /appointments` - Nieuwe afspraak
+- `GET /my-messages` - Mijn berichten
+
+### Admin Routes (auth + admin required)
+- `GET /admin/appointments` - Afspraken beheer
+- `GET /admin/glasses` - Brillen beheer
+- `GET /admin/news` - Nieuws beheer
+- `GET /admin/faq` - FAQ beheer
+- `GET /admin/contact` - Berichten beheer
+- `GET /admin/users` - Gebruikers beheer
+
+## Testing
+
+```bash
+# Run alle tests
+composer test
+
+# Of direct via artisan
+php artisan test
+```
+
+## Security Features
+
+- Laravel Breeze authenticatie
+- CSRF bescherming op alle forms
+- Admin middleware voor beveiligde routes
+- Password hashing met bcrypt
+- Form request validatie
+
+## Packages
+
+### Backend
+- **Laravel 12** - PHP Framework
+- **Laravel Breeze** - Authenticatie scaffolding
+- **Intervention Image** - Afbeelding verwerking en resize
+
+### Frontend
+- **Tailwind CSS 3** - Utility-first CSS framework
+- **Alpine.js** - Lightweight JavaScript framework
+- **Vite** - Modern build tool
+
+## Auteur
+
+Yassine Eddouks - EhB
