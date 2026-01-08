@@ -15,26 +15,26 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         Home
                     </x-nav-link>
+                    @auth
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            Dashboard
+                        </x-nav-link>
+                        <x-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
+                            Afspraken
+                        </x-nav-link>
+                        <x-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
+                            Webshop Brillen
+                        </x-nav-link>
+                    @endauth
                     <x-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
                         Nieuws
                     </x-nav-link>
-                <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
+                    <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.*')">
                         FAQ
                     </x-nav-link>
                     <x-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
                         Contact
                     </x-nav-link>
-                    @auth
-                        <x-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
-                            Webshop Brillen
-                        </x-nav-link>
-                        <x-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
-                            Afspraken
-                        </x-nav-link>
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            Dashboard
-                        </x-nav-link>
-                    @endauth
                 </div>
             </div>
 
@@ -104,6 +104,17 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 Home
             </x-responsive-nav-link>
+            @auth
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    Dashboard
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
+                    Afspraken
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
+                    Brillen
+                </x-responsive-nav-link>
+            @endauth
             <x-responsive-nav-link :href="route('news.index')" :active="request()->routeIs('news.*')">
                 Nieuws
             </x-responsive-nav-link>
@@ -113,17 +124,6 @@
             <x-responsive-nav-link :href="route('contact.form')" :active="request()->routeIs('contact.*')">
                 Contact
             </x-responsive-nav-link>
-            @auth
-                <x-responsive-nav-link :href="route('glasses.index')" :active="request()->routeIs('glasses.*')">
-                    Brillen
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.*')">
-                    Afspraken
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    Dashboard
-                </x-responsive-nav-link>
-            @endauth
         </div>
 
         @auth

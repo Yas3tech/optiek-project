@@ -17,4 +17,8 @@ protected $fillable = [
     'content',
     'published_at',
 ];
+
+protected $casts = [
+    'published_at' => 'datetime',
+];
 }
