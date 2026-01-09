@@ -204,6 +204,14 @@ php artisan test
 - **Alpine.js** - Lightweight JavaScript framework
 - **Vite** - Modern build tool
 
+## Bronnen
+
+- [PHP for Beginners](https://laracasts.com/series/php-for-beginners)
+- [Laravel Website](https://laravel.com/)
+- [Laravel Pint Documentatie](https://laravel.com/docs/12.x/pint)
+- [Cursus Presentatie 1](https://docs.google.com/presentation/d/1HJKWWvmLAkCGlzXRJI0RcOKCvILR3lR-pstak7YgS7U/edit)
+- [Cursus Presentatie 2](https://docs.google.com/presentation/d/1H-AoNe8KofsLuflZzoKWeDnsWMpz6iXf-HRLvtTnFBE/edit)
+
 ## Auteur
 
 Yassine Eddouks - EhB
